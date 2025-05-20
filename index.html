@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Upper East Side Historical District</title>
+<style>
+  #popup {
+    display: none; /* Initially hidden */
+    position: fixed; /* Stay in place when scrolling */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the popup */
+    background-color: white;
+    border: 1px solid black;
+    padding: 20px;
+    z-index: 1000; /* Ensure it's on top of other elements */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  #overlay {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 999; /* Below the popup */
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    overflow: hidden;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li a:hover {
+    background-color: #ddd;
+  }
+</style>
+</head>
+<body>
+
+<ul>
+    <li><a href="#" onclick="showPopup('This is the final project for a class by Prof Stephen Zweibel taught at the CUNY Graduate Center (Spring 20250 on Javascript, HTML and CSS using the mapping program Leaflet.)')")>About</a></li>
+    <li><a href="main.html">Leaflet Project</a></li>
+    <li><a href="https://kids.kiddle.co/Upper_East_Side">Historical Website</a></li>
+    <li><a href="#">Documentation</a>
+                  <div class="submenu">
+                    <a href="pdfs\Documentation of Leaflet Project.pdf">Data Sources</a>                 
+                    <a href="pdfs\Program Flow.pdf">Program Flow</a>
+                    <a href="pdfs\Wire Diagrams.pdf">WireFrames</a>
+                    </div>
+     </li>
+</ul>
+
+<h1></h1>
+<center><embed src="pdfs\UES district.pdf" type="application/pdf" width="800px" height="800px" /><</center>
+
+
+
+<div id="overlay"></div>
+<div id="popup">
+  <p id="popupText"></p>
+  <button onclick="hidePopup()">Close</button>
+</div>
+
+<script>
+  const popup = document.getElementById('popup');
+  const popupText = document.getElementById('popupText');
+  const overlay = document.getElementById('overlay');
+
+  function showPopup(text) {
+    popupText.textContent = text;
+    popup.style.display = 'block';
+    overlay.style.display = 'block';
+  }
+
+  function hidePopup() {
+    popup.style.display = 'none';
+    overlay.style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
