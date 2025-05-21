@@ -50,6 +50,22 @@
   li a:hover {
     background-color: #ddd;
   }
+
+  div.submenu {
+    position: absolute;  /* don't create space in the document flow */
+    background-color: #f0f0f0;
+    visibility: hidden;  /* don't show submenu by default */
+  }
+
+  /* show submenu if the parent menu has the "expanded" class */
+  li.menu.expanded > div.submenu {
+    visibility: visible;
+  }
+
+  /* also show submenu if the parent menu is hovered over */
+  /* li.menu:hover > div.submenu {
+    visibility: visible;
+  } */
 </style>
 </head>
 <body>
@@ -58,9 +74,9 @@
     <li><a href="#" onclick="showPopup('This is the final project for a class by Prof Stephen Zweibel taught at the CUNY Graduate Center (Spring 20250 on Javascript, HTML and CSS using the mapping program Leaflet.)')")>About</a></li>
     <li><a href="main.html">Leaflet Project</a></li>
     <li><a href="https://kids.kiddle.co/Upper_East_Side">Historical Website</a></li>
-    <li><a href="#">Documentation</a>
+    <li class="menu"><a class="label" href="#">Documentation</a>
                   <div class="submenu">
-                    <a href="pdfs\Documentation of Leaflet Project.pdf">Data Sources</a>                 
+                    <a href="pdfs\Documentation of Leaflet Project.pdf">Data Sources</a>
                     <a href="pdfs\Program Flow.pdf">Program Flow</a>
                     <a href="pdfs\Wire Diagrams.pdf">WireFrames</a>
                     </div>
@@ -93,6 +109,22 @@
     popup.style.display = 'none';
     overlay.style.display = 'none';
   }
+
+  // Iterate all li items with class "menu"
+  document.querySelectorAll("li.menu").forEach(menu => {
+    // Get the label
+    let label = menu.querySelector("a.label");
+    // Clicking the label toggles the expanded class of the menu
+    label.addEventListener("click", () => {
+      menu.classList.toggle("expanded");
+    })
+    // Clicking anywhere outside menu removes the expanded class
+    document.addEventListener("click", (e) => {
+      if (!menu.contains(e.target)) {
+         menu.classList.remove("expanded");
+      }
+    });
+  })
 </script>
 
 </body>
